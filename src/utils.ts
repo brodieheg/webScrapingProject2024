@@ -54,7 +54,13 @@ export const searchForUrls: any = async (
     // Remove empty strings and duplicates
     // keep this as a set, don't make array
     const validSubDomains = subdomains.filter((href) => {
-      return isValidUrl(href);
+      return (
+        isValidUrl(href) &&
+        (href.includes("careers") ||
+          href.includes("about") ||
+          href.includes("work") ||
+          href.includes("benefits"))
+      );
     });
     for (let index = 0; index < validSubDomains.length; index++) {
       const subdomain = validSubDomains[index];
