@@ -10,8 +10,7 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT;
 
 app.post("/", async (req, res) => {
-  console.log(await searchForUrls(req.body.text, [req.body.keyword]));
-  res.send("hi");
+  res.send(await searchForUrls(req.body.text, [req.body.keyword]));
 });
 
 app.listen(PORT, () => {
