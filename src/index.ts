@@ -7,7 +7,11 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
+
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 app.post("/", async (req, res, next) => {
   try {
@@ -18,7 +22,7 @@ app.post("/", async (req, res, next) => {
   }
 });
 
-app.listen(PORT || 4000, () => {
+app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
