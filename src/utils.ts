@@ -6,12 +6,16 @@
 // look into searching by html element and getting it from there
 
 // setup function (non-recursive) that initializes the recursion
+import { error } from "console";
 import fetch from "node-fetch";
 
 export const searchForUrls: any = async (
   baseUrl: string,
   keywords: string[]
 ) => {
+  if (!isValidUrl(baseUrl)) {
+    throw new Error("Invalid URL");
+  }
   // Search for internal URL's and format them
   if (await searchForKeywords(baseUrl, keywords[0])) {
     return baseUrl;
@@ -58,7 +62,6 @@ export const searchForUrls: any = async (
         isValidUrl(href) &&
         (href.includes("careers") ||
           href.includes("about") ||
-          href.includes("work") ||
           href.includes("benefits"))
       );
     });

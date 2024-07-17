@@ -9,15 +9,17 @@ const app = express();
 app.use(bodyParser.json());
 const PORT = process.env.PORT;
 
-app.post("/", async (req, res) => {
-  res.send(await searchForUrls(req.body.text, [req.body.keyword]));
+app.post("/", async (req, res, next) => {
+  try {
+    const response = await searchForUrls(req.body.text, [req.body.keyword]);
+    res.send(response);
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT || 4000, () => {
   console.log(`App listening on port ${PORT}`);
 });
-
-console.log(PORT);
-console.log(process.env.STATUS);
 
 // todo: set up express
