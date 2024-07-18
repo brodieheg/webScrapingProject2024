@@ -57,7 +57,7 @@ export const searchForUrls: any = async (
 
     // Remove empty strings and duplicates
     // keep this as a set, don't make array
-    const validSubDomains = subdomains.filter((href) => {
+    const validSubDomains = subdomains.filter((href: any) => {
       return (
         isValidUrl(href) &&
         (href.includes("careers") ||
@@ -66,7 +66,7 @@ export const searchForUrls: any = async (
       );
     });
     for (let index = 0; index < validSubDomains.length; index++) {
-      const subdomain = validSubDomains[index];
+      const subdomain: any = validSubDomains[index];
       console.log(subdomain);
       if (await searchForKeywords(subdomain, keywords[0])) {
         console.log("found it!" + keywords[0]);
