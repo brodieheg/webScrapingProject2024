@@ -60,8 +60,10 @@ export const searchForUrls = async (
       return (
         isValidUrl(href) &&
         (href.includes("careers") ||
-          href.includes("about") ||
-          href.includes("benefits"))
+        href.includes("jobs") ||
+        href.includes("benefits") ||
+          href.includes("about")
+        )
       );
     });
     for (let index = 0; index < validSubDomains.length; index++) {

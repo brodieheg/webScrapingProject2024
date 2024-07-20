@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res, next) => {
   try {
-    console.log('trying')
+    console.log(req.body.keyword)
     const response = await searchForUrls(req.body.text, [req.body.keyword]);
     res.send(response);
   } catch (err) {
