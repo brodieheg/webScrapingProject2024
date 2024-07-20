@@ -2,36 +2,21 @@
   "name": "node-ts-esm-example",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "build": "swc src --out-dir dist/src",
-    "build:ci": "tsc && npm run build:dev",
-    "build:watch": "swc src -w --out-dir dist/src",
-    "migrate": "node --import tsx bin/run-migration.ts",
-    "start": " npm run build && node 'dist/src/src/index.js'"
+    "start": "node 'src/index.js'"
   },
-  "keywords": [],
   "author": "Brodie Heginbotham",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.2"
   },
   "dependencies": {
-    "@swc/cli": "^0.4.0",
-    "@swc/core": "^1.6.13",
-    "@swc/plugin-transform-imports": "^2.0.9",
-    "@types/node": "^20.14.11",
     "body-parser": "^1.20.2",
-    "chalk": "^5.3.0",
-    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "fastify": "^4.24.3",
-    "node-fetch": "^3.3.2",
-    "swc": "^1.0.11",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3"
+    "node-fetch": "^3.3.2"
   },
   "engines": {
     "node": ">=20.6"
