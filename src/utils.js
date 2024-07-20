@@ -6,12 +6,11 @@
 // look into searching by html element and getting it from there
 
 // setup function (non-recursive) that initializes the recursion
-import { error } from "console";
 import fetch from "node-fetch";
 
-export const searchForUrls: any = async (
-  baseUrl: string,
-  keywords: string[]
+export const searchForUrls = async (
+  baseUrl,
+  keywords
 ) => {
   if (!isValidUrl(baseUrl)) {
     throw new Error("Invalid URL");
@@ -24,20 +23,20 @@ export const searchForUrls: any = async (
     return response.text();
   });
 
-  const hrefRegex: RegExp = /href="(?:[^"\\]|\\.)*"/g;
+  const hrefRegex = /href="(?:[^"\\]|\\.)*"/g;
   // Find all matches of href attributes
-  const hrefMatches: string[] | null = text.match(hrefRegex);
+  const hrefMatches = text.match(hrefRegex);
 
   if (hrefMatches) {
     // Iterate over matches and extract subdomains
     const subdomains = hrefMatches.map((match) => {
-      let hrefAttribute: string = match.slice(6, -1); // Remove 'href="' and '"'
+      let hrefAttribute = match.slice(6, -1); // Remove 'href="' and '"'
       if (
         // identifies internal links
         hrefAttribute.includes(baseUrl) ||
         hrefAttribute.charAt(0) === "/"
       ) {
-        let newHrefAttribute: string;
+        let newHrefAttribute;
         if (
           // formats url, accounting for double slash possibility
           hrefAttribute.charAt(0) === "/" &&
@@ -57,7 +56,7 @@ export const searchForUrls: any = async (
 
     // Remove empty strings and duplicates
     // keep this as a set, don't make array
-    const validSubDomains = subdomains.filter((href: any) => {
+    const validSubDomains = subdomains.filter((href) => {
       return (
         isValidUrl(href) &&
         (href.includes("careers") ||
@@ -66,7 +65,7 @@ export const searchForUrls: any = async (
       );
     });
     for (let index = 0; index < validSubDomains.length; index++) {
-      const subdomain: any = validSubDomains[index];
+      const subdomain = validSubDomains[index];
       console.log(subdomain);
       if (await searchForKeywords(subdomain, keywords[0])) {
         console.log("found it!" + keywords[0]);
@@ -78,9 +77,9 @@ export const searchForUrls: any = async (
 };
 
 const searchForKeywords = async (
-  baseUrl: string,
-  keyword: string
-): Promise<boolean> => {
+  baseUrl,
+  keyword
+) => {
   const text = await fetch(baseUrl).then(async (response) => {
     return response.text();
   });
@@ -90,7 +89,7 @@ const searchForKeywords = async (
   return false;
 };
 
-const isValidUrl = (urlString: string) => {
+const isValidUrl = (urlString) => {
   try {
     return Boolean(new URL(urlString));
   } catch (e) {
